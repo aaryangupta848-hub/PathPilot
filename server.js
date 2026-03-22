@@ -46,13 +46,12 @@ const startServer = async () => {
 
   server.all(/.*/, (req, res) => handle(req, res));
 
-  const port = process.env.PORT || 3000;
-  server.listen(port, () => {
+const port = process.env.PORT || 3000;
+
 server.listen(port, "0.0.0.0", () => {
   console.log(`PathPilot running on http://localhost:${port}`);
-  });
-};
-
+});
+  
 startServer().catch((error) => {
   console.error(error);
   process.exit(1);

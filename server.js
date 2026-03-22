@@ -11,10 +11,12 @@ const nextApp = next({
   dev,
   dir: __dirname,
   webpack: true,
-  turbopack: false
+  turbopack: false,
 });
+
 const handle = nextApp.getRequestHandler();
 
+// Routes
 const authRoutes = require("./routes/auth");
 const goalRoutes = require("./routes/goals");
 const roadmapRoutes = require("./routes/roadmaps");
@@ -27,32 +29,46 @@ const timetableRoutes = require("./routes/timetables");
 const aiRoutes = require("./routes/ai");
 
 const startServer = async () => {
-  await connectDB();
-  await nextApp.prepare();
+  try {
+    // Connect DB
+    await connectDB();
 
-  const server = express();
-  server.use(express.json());
+    // Prepare Next.js
+    await nextApp.prepare();
 
-  server.use("/api/auth", authRoutes);
-  server.use("/api/goals", goalRoutes);
-  server.use("/api/roadmaps", roadmapRoutes);
-  server.use("/api/decisions", decisionRoutes);
-  server.use("/api/focus-sessions", focusSessionRoutes);
-  server.use("/api/dashboard", dashboardRoutes);
-  server.use("/api/exam-workspaces", examWorkspaceRoutes);
-  server.use("/api/custom-exams", customExamRoutes);
-  server.use("/api/timetables", timetableRoutes);
-  server.use("/api", aiRoutes);
+    const server = express();
 
-  server.all(/.*/, (req, res) => handle(req, res));
+    // Middleware
+    server.use(express.json());
 
-const port = process.env.PORT || 3000;
+    // API Routes
+    server.use("/api/auth", authRoutes);
+    server.use("/api/goals", goalRoutes);
+    server.use("/api/roadmaps", roadmapRoutes);
+    server.use("/api/decisions", decisionRoutes);
+    server.use("/api/focus-sessions", focusSessionRoutes);
+    server.use("/api/dashboard", dashboardRoutes);
+    server.use("/api/exam-workspaces", examWorkspaceRoutes);
+    server.use("/api/custom-exams", customExamRoutes);
+    server.use("/api/timetables", timetableRoutes);
+    server.use("/api", aiRoutes);
 
-server.listen(port, "0.0.0.0", () => {
-  console.log(`PathPilot running on http://localhost:${port}`);
-});
-  
-startServer().catch((error) => {
-  console.error(error);
-  process.exit(1);
-});
+    // Handle all other routes (Next.js)
+    server.all(/.*/, (req, res) => handle(req, res));
+
+    // PORT (IMPORTANT)
+    const port = process.env.PORT || 3000;
+
+    // START SERVER (Render + Local both)
+    server.listen(port, "0.0.0.0", () => {
+      console.log(`🚀 PathPilot running on http://localhost:${port}`);
+    });
+
+  } catch (error) {
+    console.error("❌ Server failed to start:", error);
+    process.exit(1);
+  }
+};
+
+// Start server
+startServer();

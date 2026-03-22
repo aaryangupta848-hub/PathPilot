@@ -1,0 +1,47 @@
+{
+  "name": "pathpilot",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development node server.js",
+    "build": "next build --webpack",
+    "build:debug": "next build --webpack --debug-prerender",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@radix-ui/react-progress": "latest",
+    "@radix-ui/react-slot": "latest",
+    "@radix-ui/react-tabs": "latest",
+    "bcryptjs": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "cross-env": "latest",
+    "dotenv": "latest",
+    "express": "latest",
+    "framer-motion": "latest",
+    "jsonwebtoken": "latest",
+    "lucide-react": "latest",
+    "mongoose": "^8.19.1",
+    "next": "latest",
+    "nodemailer": "^6.9.16",
+    "openai": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "recharts": "latest",
+    "tailwind-merge": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "10.4.20",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "postcss": "8.4.49",
+    "tailwindcss": "3.4.17",
+    "tailwindcss-animate": "latest",
+    "typescript": "latest"
+  }
+}

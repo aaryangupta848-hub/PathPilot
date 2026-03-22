@@ -10,10 +10,7 @@ out
 dist
 build/
 
-# Env files
-.env
-.env.*
-!.env.example
+
 
 # Logs
 logs

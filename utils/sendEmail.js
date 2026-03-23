@@ -1,25 +1,19 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-// 🔥 Hardcoded transporter (TEMP FIX)
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: "aaryangupta848@gmail.com",
-    pass: "pcyk mpuy dmof pqqz",
-  },
-});
+// Initialize Resend with API key
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function sendEmail({ to, subject, text, html }) {
   try {
-    const info = await transporter.sendMail({
-      from: "aaryangupta848@gmail.com",
+    const response = await resend.emails.send({
+      from: "onboarding@resend.dev", // ✅ works instantly (no setup needed)
       to,
       subject,
       text,
       html,
     });
 
-    console.log("✅ Email sent:", info.response);
+    console.log("✅ Email sent:", response);
   } catch (err) {
     console.error("❌ Email error:", err);
     throw err;

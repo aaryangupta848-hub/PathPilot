@@ -1,46 +1,31 @@
 const nodemailer = require("nodemailer");
 
-let transporter = null;
-
-function getTransporter() {
-  if (transporter) {
-    return transporter;
-  }
-
-  const emailUser = process.env.EMAIL_USER;
-  const emailPass = process.env.EMAIL_PASS;
-
-  if (!emailUser || !emailPass) {
-    return null;
-  }
-
-  transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: emailUser,
-      pass: emailPass
-    }
-  });
-
-  return transporter;
-}
+// 🔥 Hardcoded transporter (TEMP FIX)
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "aaryangupta848@gmail.com",
+    pass: "pcyk mpuy dmof pqqz",
+  },
+});
 
 async function sendEmail({ to, subject, text, html }) {
-  const transport = getTransporter();
+  try {
+    const info = await transporter.sendMail({
+      from: "aaryangupta848@gmail.com",
+      to,
+      subject,
+      text,
+      html,
+    });
 
-  if (!transport) {
-    throw new Error("Email transport is not configured.");
+    console.log("✅ Email sent:", info.response);
+  } catch (err) {
+    console.error("❌ Email error:", err);
+    throw err;
   }
-
-  await transport.sendMail({
-    from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
-    to,
-    subject,
-    text,
-    html
-  });
 }
 
 module.exports = {
-  sendEmail
+  sendEmail,
 };

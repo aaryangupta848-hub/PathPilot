@@ -10,7 +10,10 @@ out
 dist
 build/
 
-
+# Environment variables (IMPORTANT)
+.env
+.env.*
+!.env.example
 
 # Logs
 logs

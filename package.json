@@ -30,7 +30,8 @@
     "react-dom": "latest",
     "recharts": "latest",
     "tailwind-merge": "latest",
-    "zod": "latest"
+    "zod": "latest",
+    "resend": "^3.0.0"
   },
   "devDependencies": {
     "@types/node": "latest",

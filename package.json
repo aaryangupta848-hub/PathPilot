@@ -30,6 +30,7 @@
     "react-dom": "latest",
     "recharts": "latest",
     "resend": "^6.9.4",
+    "sib-api-v3-sdk": "^8.5.0",
     "tailwind-merge": "latest",
     "zod": "latest"
   },

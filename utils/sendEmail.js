@@ -45,7 +45,7 @@ const htmlContent = `
 
     <!-- BUTTON -->
     <div style="text-align:center; margin:30px 0;">
-      <a href="https://your-app-url.up.railway.app"
+      <a href="https://pathpilot1.up.railway.app/"
         style="
           display:inline-block;
           padding:12px 28px;

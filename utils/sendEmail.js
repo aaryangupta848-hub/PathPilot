@@ -16,39 +16,68 @@ async function sendEmail({ to, subject, text, html, otp }) {
     }
 
     // 🎨 MODERN EMAIL DESIGN
-    const htmlContent = `
-    <div style="font-family: Arial, sans-serif; background:#0f172a; padding:40px; color:#fff;">
-      
-      <div style="max-width:500px; margin:auto; background:#111827; border-radius:12px; padding:30px; text-align:center; box-shadow:0 10px 30px rgba(0,0,0,0.4);">
-        
-        <h2 style="color:#6366f1; margin-bottom:10px;">🚀 PathPilot</h2>
-        
-        <p style="color:#9ca3af; margin-bottom:20px;">
-          Verify your email to continue your journey
-        </p>
+const htmlContent = `
+<div style="margin:0; padding:0; background:#0b0f1a; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  
+  <div style="max-width:520px; margin:40px auto; background:linear-gradient(145deg, #111827, #0f172a); border-radius:16px; padding:40px 30px; box-shadow:0 20px 60px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.05);">
+    
+    <!-- Brand -->
+    <div style="text-align:center; margin-bottom:25px;">
+      <h1 style="margin:0; font-size:22px; color:#818cf8;">✦ PathPilot</h1>
+      <p style="color:#6b7280; font-size:13px;">AI-powered student growth platform</p>
+    </div>
 
-        <div style="background:#1f2937; padding:20px; border-radius:10px; margin:20px 0;">
-          <p style="margin:0; color:#9ca3af;">Your OTP Code</p>
-          
-          <h1 style="letter-spacing:6px; font-size:32px; color:#22c55e; margin:10px 0;">
-            ${finalOtp}
-          </h1>
-        </div>
+    <!-- Heading -->
+    <h2 style="text-align:center; color:#e5e7eb;">Verify Your Email</h2>
 
-        <p style="color:#9ca3af; font-size:14px;">
-          This code is valid for 5 minutes.<br/>
-          Do not share it with anyone.
-        </p>
+    <p style="text-align:center; color:#9ca3af; font-size:14px; margin-bottom:30px;">
+      Enter the verification code below to continue
+    </p>
 
-        <hr style="border:none; border-top:1px solid #374151; margin:25px 0;" />
+    <!-- OTP Box -->
+    <div style="background:#111827; padding:25px; border-radius:12px; text-align:center; margin-bottom:25px;">
+      <p style="color:#9ca3af; font-size:12px;">ONE-TIME PASSWORD</p>
 
-        <p style="font-size:12px; color:#6b7280;">
-          If you didn’t request this, you can safely ignore this email.
-        </p>
-
+      <div style="font-size:34px; letter-spacing:10px; font-weight:bold; color:#22c55e;">
+        ${finalOtp}
       </div>
     </div>
-    `;
+
+    <!-- BUTTON -->
+    <div style="text-align:center; margin:30px 0;">
+      <a href="https://your-app-url.up.railway.app"
+        style="
+          display:inline-block;
+          padding:12px 28px;
+          font-size:14px;
+          color:#ffffff;
+          background:linear-gradient(135deg,#6366f1,#4f46e5);
+          border-radius:8px;
+          text-decoration:none;
+          font-weight:600;
+          box-shadow:0 4px 15px rgba(99,102,241,0.4);
+        ">
+        Open PathPilot →
+      </a>
+    </div>
+
+    <!-- Info -->
+    <p style="text-align:center; color:#9ca3af; font-size:13px;">
+      This code will expire in <b>5 minutes</b>.<br/>
+      Never share this code with anyone.
+    </p>
+
+    <div style="height:1px; background:rgba(255,255,255,0.06); margin:30px 0;"></div>
+
+    <!-- Footer -->
+    <p style="text-align:center; font-size:11px; color:#6b7280;">
+      If you didn’t request this, you can safely ignore this email.<br/><br/>
+      © ${new Date().getFullYear()} PathPilot
+    </p>
+
+  </div>
+</div>
+`;
 
     await emailApi.sendTransacEmail({
       sender: {
